@@ -1,0 +1,5 @@
+.env
+vendor/
+.vagrant/
+archive/
+logs/*.log
