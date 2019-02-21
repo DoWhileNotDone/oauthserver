@@ -34,25 +34,23 @@ $container['db'] = function ($container) use ($capsule) {
     return $capsule;
 };
 
-
-// TODO: Add OAUTH Storage Provider
 $container['oauthserver'] = function ($container) {
-
+    // Use the existing database connection, in PDO form, for initialising the
+    // OAuth server
     $storage= $container->get('db')->getConnection()->getPdo();
 
     $server = new OAuth2\Server($storage);
 
     //FIXME: Sort out Oauth Server Configuration
     $server->addGrantType(new OAuth2\GrantType\AuthorizationCode($storage)); // or any grant type you like!
-    $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
+    //$server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
 
     return $server;
 };
 
-
-//TODO: The Loggername and filename can be moved to env
 $container["logger"] = function ($container) {
-    $logger = new Logger("oauthserver");
+    $logname = getenv("LOG_NAME");
+    $logger = new Logger($logname);
 
     $formatter = new LineFormatter(
         "[%datetime%] [%level_name%]: %message% %context%\n",
@@ -61,13 +59,15 @@ $container["logger"] = function ($container) {
         true
     );
 
-    /* Log to timestamped files */
-    $rotating = new RotatingFileHandler(__DIR__ . "/../logs/oauthserver.log", 0, Logger::DEBUG);
+    $rotating = new RotatingFileHandler(__DIR__ . "/../logs/{$logname}.log", 0, Logger::DEBUG);
     $rotating->setFormatter($formatter);
     $logger->pushHandler($rotating);
 
     return $logger;
 };
+
+#Views and Templating
+$container['view'] = new \Slim\Views\PhpRenderer('../src/templates/');
 
 //Add Validation
 $container['validator'] = function ($container) {

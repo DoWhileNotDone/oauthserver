@@ -18,10 +18,14 @@ $app = new \Slim\App([
 ]);
 
 require __DIR__ . "/config/dependencies.php";
+#require __DIR__ . "/config/middleware.php";
 
 $app->get("/", function ($request, $response, $arguments) {
     $response->getBody()->write("OAUTH Server");
     return $response->withStatus(200);
 });
+
+require __DIR__ . "/routes/users.php";
+require __DIR__ . "/routes/register.php";
 
 $app->run();
