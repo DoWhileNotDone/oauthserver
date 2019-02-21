@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="Music App Project" default="info">
+  <target name="info">
+    <echo>This is the build file for the oauth server - please select the target you need. </echo>
+    <echo>The default is to output this message. Run ant -projecthelp to see other targets</echo>
+  </target>
+  <target name="development" depends="composer-install,dev-database,dev-environment" />
+  <target name="unit-testing" depends="dev-database,dev-environment" />
+
+  <target name="composer-install">
+    <!-- FIXME: Work out if there is a different way to chain arguments -->
+    <exec executable="php">
+      <arg line="composer install --no-suggest --no-progress --prefer-source --no-interaction"/>
+    </exec>
+  </target>
+  <target name="dev-database" depends="dev-db-setup,dev-db-data" />
+  <target name="dev-db-setup">
+    <!-- FIXME: Work out if there is a different way to chain arguments -->
+    <exec executable="psql">
+      <arg line="-c &quot;CREATE USER oauthserver WITH ENCRYPTED PASSWORD 'oauthserver'&quot;"  />
+    </exec>
+    <exec executable="psql">
+      <arg line="-c &quot;CREATE DATABASE oauthserver_dev WITH OWNER = oauthserver&quot;"  />
+    </exec>
+  </target>
+  <target name="dev-db-data">
+    <!-- Run the phinx development data scripts -->
+    <exec executable="vendor/bin/phinx">
+      <arg value="migrate"/>
+    </exec>
+    <exec executable="vendor/bin/phinx">
+      <arg value="seed:run"/>
+    </exec>
+  </target>
+  <target name="dev-environment" >
+    <!-- Copy the .env.development to .env -->
+    <copy file=".env.development" tofile=".env"/>
+  </target>
+</project>
