@@ -57,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   SHELL
 
-  #Install node/nvm
+  #Install node/nvm/gulp
   config.vm.provision "shell", name: "install nvm and node", privileged: false, inline: <<-SHELL
     export DEBIAN_FRONTEND=noninteractive
     cd && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
@@ -66,6 +66,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     nvm install node
     nvm use node
+    npm install -g gulp
   SHELL
 
   # Install Yarn
@@ -154,9 +155,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Symlink DocumentRoot o \Vagrant\Publics
     ln -s /vagrant/public /var/www/html/DocumentRoot
 
-    #efault:   systemctl restart apache2
-    #    default: AH00112: Warning: DocumentRoot [/var/www/html/DocumentRoot] does not exist
-
     sed -i -e "s/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/DocumentRoot/" /etc/apache2/sites-enabled/000-default.conf
     sed -i -e "s/AllowOverride None/AllowOverride All/" /etc/apache2/apache2.conf
 
@@ -164,13 +162,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     apachectl restart
     # Make sure Apache also runs after vagrant reload
     systemctl enable apache2
-  SHELL
-
-
-  # Run Ant build for provisioning development
-  # FIXME: This isn't required as a Vagrant provision
-  config.vm.provision "shell", name: "run ant build script development target", privileged: false, inline: <<-'SHELL'
-    cd /vagrant && ant development
   SHELL
 
   config.vm.post_up_message = <<MESSAGE

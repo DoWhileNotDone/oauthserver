@@ -1,10 +1,10 @@
 <?php
 
-use OAuthServer\Models\User;
+use OAuthServer\Models\Application;
 
-$app->get("/users", function ($request, $response, $arguments) {
+$app->get("/applications", function ($request, $response, $arguments) {
 
-    $users = User::all();
+    $applications = Applications::all();
 
     return $response->withStatus(200)
         ->withHeader("Content-Type", "application/json")
