@@ -3,3 +3,14 @@ vendor/
 .vagrant/
 archive/
 logs/*.log
+/cache/*
+!/cache/.keep
+/logs/*
+!/logs/.keep
+node_modules/
+public/css/*
+!public/css/.keep
+public/js/*
+!public/js/.keep
+composer.phar
+TODO
