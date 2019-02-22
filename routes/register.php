@@ -30,11 +30,9 @@ $app->post("/register", function (Request $request, Response $response, array $a
     //   return $response->withStatus(400);
     // }
 
-    //TODO: Generate (Encrypt?) Client ID
-    //TODO: Generate (Encrypt?) Client Secret
-    //TODO: Use Oath to generate client secret
-    $application->client_id = "client_id";
-    $application->client_secret = "client_secret";
+    //https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/
+    $application->client_id = bin2hex(random_bytes(32));
+    $application->client_secret = bin2hex(random_bytes(32));
 
     $application->save();
 
