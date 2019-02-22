@@ -33,3 +33,8 @@ CREATE TABLE oauthserver.applications (
 
 select * from oauthserver.applications;
 \! echo "Done!"
+
+
+\! echo "Granting Schema Privs..."
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA oauthserver TO oauthserver;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA oauthserver TO oauthserver;

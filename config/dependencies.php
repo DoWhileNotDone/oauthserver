@@ -13,16 +13,15 @@ use Rakit\Validation\Validator;
 
 $container = $app->getContainer();
 
+$dbsettings = $container->get('settings')['database'];
+
+$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($dbsettings);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
 // Database ORM
-$container['db'] = function ($c) {
-
-    $dbsettings = $c->get('settings')['database'];
-
-    $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($dbsettings);
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
-
+$container['db'] = function ($c) use ($capsule) {
     return $capsule;
 };
 
@@ -51,7 +50,7 @@ $container["logger"] = function ($container) {
         true
     );
 
-    $rotating = new RotatingFileHandler(__DIR__ . "/../logs/{$logname}.log", 0, Logger::DEBUG);
+    $rotating = new RotatingFileHandler(__DIR__ . "/../var/logs/{$logname}.log", 0, Logger::DEBUG);
     $rotating->setFormatter($formatter);
     $logger->pushHandler($rotating);
 
