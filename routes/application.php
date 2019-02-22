@@ -4,7 +4,7 @@ use OAuthServer\Models\Application;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-$app->get("/applications", function ($request, $response, $arguments) {
+$app->get("/applications", function (Request $request, Response $response, array $arguments): Response {
 
     $applications = Application::all();
 

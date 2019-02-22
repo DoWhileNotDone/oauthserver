@@ -23,7 +23,8 @@ require __DIR__ . "/config/middleware.php";
 
 # Define Routes
 require __DIR__ . "/routes/index.php";
-require __DIR__ . "/routes/applications.php";
+require __DIR__ . "/routes/application.php";
+require __DIR__ . "/routes/authorization.php";
 require __DIR__ . "/routes/register.php";
 
 $app->run();

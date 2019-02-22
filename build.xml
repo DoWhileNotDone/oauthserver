@@ -17,29 +17,23 @@
   <target name="dev-db-setup">
     <!-- FIXME: Work out if there is a different way to chain arguments -->
     <exec executable="psql">
-      <arg line="-f ./scripts/db/sql/0_init.sql postgres"/>
+      <arg line="-f ./scripts/db/sql/0_init.sql"/>
     </exec>
   </target>
   <target name="dev-db-data">
-    <!-- Run the phinx development data scripts -->
-    <!-- <exec executable="vendor/bin/phinx">
-      <arg value="migrate"/>
+    <exec executable="psql">
+      <arg line="-f ./scripts/db/sql/1_exampledata.sql"/>
     </exec>
-    <exec executable="vendor/bin/phinx">
-      <arg value="seed:run"/>
-    </exec> -->
   </target>
   <target name="dev-environment" >
     <!-- Copy the .env.development to .env -->
     <copy file=".env.development" tofile=".env"/>
   </target>
-
   <target name="npm-install" >
     <exec executable="npm">
       <arg line="install"/>
     </exec>
   </target>
-
   <target name="run-gulp" >
     <exec executable="gulp">
       <arg line="vagrant"/>
