@@ -2,11 +2,11 @@
 vendor/
 .vagrant/
 archive/
-logs/*.log
-/cache/*
-!/cache/.keep
-/logs/*
-!/logs/.keep
+var/cache/*
+!var/cache/.keep
+var/logs/*.log
+var/logs/*
+!var/logs/.keep
 node_modules/
 public/css/*
 !public/css/.keep

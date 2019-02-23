@@ -2,9 +2,9 @@
 if !Vagrant::Util::Platform.windows?
   system("
       if [ #{ARGV[0]} = 'up' ]; then
-          echo 'Setting group write permissions for ./logs/*'
-          chmod 775 ./logs
-          chmod 664 ./logs/*
+          echo 'Setting group write permissions for ./var/logs/*'
+          chmod 775 ./var/logs
+          chmod 664 ./var/logs/*
       fi
   ")
 end
@@ -93,7 +93,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   SHELL
 
   # Make sure logs folder is owned by apache with group vagrant
-  config.vm.synced_folder "logs", "/vagrant/logs", owner: "www-data", group: "vagrant"
+  config.vm.synced_folder "var/logs", "/vagrant/var/logs", owner: "www-data", group: "vagrant"
 
   config.vm.provision "shell", name: "install php", inline: <<-SHELL
 

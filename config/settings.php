@@ -7,13 +7,13 @@ return [
         // Renderer settings
         'renderer' => [
             'template_path' => __DIR__ . '/../templates/',
-            'cache_path' => getenv('DEBUG') ? false : __DIR__ . '/../cache/',
+            'cache_path' => getenv('DEBUG') ? false : __DIR__ . '/../var/cache/',
         ],
 
         // Monolog settings
         'logger' => [
             'name' => 'slim-app',
-            'path' => getenv('docker') ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+            'path' => getenv('docker') ? 'php://stdout' : __DIR__ . '/../var/logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
         'database' => [

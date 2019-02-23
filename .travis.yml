@@ -13,7 +13,7 @@ install:
 before_script:
   - ant unit-testing
 script:
-  - phpunit --bootstrap vendor/autoload.php tests/  --coverage-clover tests/logs/clover.xml --whitelist src/
+  - phpunit --bootstrap vendor/autoload.php tests/  --coverage-clover var/tests/coverall/clover.xml --whitelist src/
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v
 cache:
