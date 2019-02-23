@@ -17,12 +17,12 @@
   <target name="dev-db-setup">
     <!-- FIXME: Work out if there is a different way to chain arguments -->
     <exec executable="psql">
-      <arg line="-f ./scripts/db/sql/0_init.sql"/>
+      <arg line="-f ./scripts/db/sql/0_init.sql postgres"/>
     </exec>
   </target>
   <target name="dev-db-data">
     <exec executable="psql">
-      <arg line="-f ./scripts/db/sql/1_exampledata.sql"/>
+      <arg line="-f ./scripts/db/sql/1_exampledata.sql postgres"/>
     </exec>
   </target>
   <target name="dev-environment" >
