@@ -1,5 +1,5 @@
 {
-  "name": "design-patterns",
+  "name": "davegthemighty-oauthserver",
   "version": "1.0.0",
   "description": "php practice",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davegthemighty/designpatterns.git"
+    "url": "git+https://github.com/davegthemighty/oauthserver.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/davegthemighty/designpatterns/issues"
+    "url": "https://github.com/davegthemighty/oauthserver/issues"
   },
-  "homepage": "https://github.com/davegthemighty/designpatterns#readme",
+  "homepage": "https://github.com/davegthemighty/oauthserver#readme",
   "dependencies": {
     "bootstrap": "^4.2.1",
     "jquery": "^3.3.1",
