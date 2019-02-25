@@ -15,4 +15,12 @@ class Authorization extends Model
     {
         return $this->belongsTo('OAuthServer\Models\Application', 'application_id');
     }
+
+    /**
+     * Get the user associated with the authorization.
+     */
+    public function user()
+    {
+        return $this->belongsTo('OAuthServer\Models\User', 'user_id');
+    }
 }
