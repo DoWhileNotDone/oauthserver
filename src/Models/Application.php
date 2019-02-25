@@ -13,6 +13,6 @@ class Application extends Model
      */
     public function authorizations()
     {
-        return $this->hasMany('MusicApp\Models\Authorization');
+        return $this->hasMany('OAuthServer\Models\Authorization');
     }
 }

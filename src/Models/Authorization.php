@@ -13,6 +13,6 @@ class Authorization extends Model
      */
     public function application()
     {
-        return $this->belongsTo('MusicApp\Models\Application');
+        return $this->belongsTo('OAuthServer\Models\Application', 'application_id');
     }
 }

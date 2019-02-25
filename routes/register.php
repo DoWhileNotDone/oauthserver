@@ -19,8 +19,8 @@ $app->post("/register", function (Request $request, Response $response, array $a
     //TODO: Parse the input
     $application->application_name = $parsedBody['application_name'];
     $application->application_description = $parsedBody['application_description'];
-    $application->homepage_url = $parsedBody['homepage_url'];
-    $application->callback_url = $parsedBody['callback_url'];
+    $application->homepage_uri = $parsedBody['homepage_uri'];
+    $application->callback_uri = $parsedBody['callback_uri'];
 
     //TODO Validate the request...
     // $validation = $this->validator->validate($application->toArray(), $application->getRules());

@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+session_start();
 date_default_timezone_set("UTC");
 
 require __DIR__ . "/vendor/autoload.php";
@@ -24,7 +25,8 @@ require __DIR__ . "/config/middleware.php";
 # Define Routes
 require __DIR__ . "/routes/index.php";
 require __DIR__ . "/routes/application.php";
-require __DIR__ . "/routes/authorization.php";
+require __DIR__ . "/routes/authorize.php";
+require __DIR__ . "/routes/token.php";
 require __DIR__ . "/routes/register.php";
 
 $app->run();
