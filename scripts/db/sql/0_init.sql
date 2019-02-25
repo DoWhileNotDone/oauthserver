@@ -34,16 +34,30 @@ CREATE TABLE oauthserver.applications (
 select * from oauthserver.applications;
 \! echo "Done!"
 
+\! echo "Creating User Table..."
+CREATE TABLE oauthserver.users (
+	user_id  SERIAL PRIMARY KEY,
+	user_name VARCHAR(255) NOT NULL,
+  user_email VARCHAR(255) NOT NULL UNIQUE,
+	created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at timestamp NULL
+);
+
+select * from oauthserver.users;
+\! echo "Done!"
+
 \! echo "Creating Authorization Table..."
 CREATE TABLE oauthserver.authorizations (
 	authorization_id  SERIAL PRIMARY KEY,
   application_id INTEGER NOT NULL REFERENCES oauthserver.applications (application_id),
+  user_id INTEGER NOT NULL REFERENCES oauthserver.users (user_id),
   scope VARCHAR(255) NOT NULL,
   state VARCHAR(255) NOT NULL,
   auth_code VARCHAR(70) NOT NULL,
   auth_code_expiration timestamp NOT NULL,
   access_token VARCHAR(70) NULL,
   token_expiration timestamp NULL,
+
 	created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at timestamp NULL
 );
