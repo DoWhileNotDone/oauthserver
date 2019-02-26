@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Music App Project" default="info">
+<project name="Oauth Server Project" default="info">
   <target name="info">
     <echo>This is the build file for the oauth server - please select the target you need.</echo>
     <echo>The default is to output this message. Run ant -projecthelp to see other targets</echo>
