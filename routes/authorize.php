@@ -61,7 +61,7 @@ $app->post("/authorize", function (Request $request, Response $response, array $
 
     $authorization->application_id = $application->application_id;
     // TODO: Associate the authorization with the user currently authenticated on this provider server
-    $authorization->user_id = User::where('user_email', 'davegthemighty@hotmail.com')->first()->user_id;
+    $authorization->user()->associate(User::where('user_email', 'davegthemighty@hotmail.com')->first());
     $authorization->scope = ""; //TBC
     $authorization->state = $state;
     $authorization->auth_code = bin2hex(random_bytes(16));
